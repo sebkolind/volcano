@@ -8,7 +8,7 @@
 <?php get_header(); ?>
 
 <div class="hello">
-	<h1>Hi! This is Volcano.</h1>
+	<?php get_partial('home-h1'); ?>
 	<div class="body">
 		<p>This is just a basic template based in /site/theme/templates named home.php.</p>
 		<p>Go ahead and edit or remove it &mdash; add your own templates or other stuff. It's all up to you.</p>
