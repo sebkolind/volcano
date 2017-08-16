@@ -53,14 +53,14 @@ The only thing you have to do is use `get_stylesheet()` and `get_scripts()`. Exa
 ```
 <!DOCTYPE html>
 <html>
-	<head>
-		<?php get_stylesheet(); ?>
-	</head>
-	<body>
-		...
+  <head>
+    <?php get_stylesheet(); ?>
+  </head>
+  <body>
+    ...
 
-		<?php get_scripts(); ?>
-	</body>
+    <?php get_scripts(); ?>
+  </body>
 </html>		
 ``` 
 
