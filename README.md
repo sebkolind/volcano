@@ -24,7 +24,8 @@ Make a folder to run your site from. Example:
 `git clone https://github.com/sebastianks/volcano.git ~path/to/site/`
 
 ## Theming
-You always start off with a very basic theme that let's you know Volcano is running. You can use this as a foundation for your theme, or you can delete everything and build your own.
+You always start off with a very basic theme that let's you know Volcano is running. 
+You can use this as a foundation for your theme, or you can delete everything and build your own.
 
 There are some minimum requirements for your theme to run. That is:
 
