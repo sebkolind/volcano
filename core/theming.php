@@ -30,14 +30,26 @@ function get_sidebar() {
  * @desc - get minified styles
  */
 function get_stylesheets() {
-	echo '<link rel="stylesheet" type="text/css" href="/site/minified.css.php">';
+	if (USE_MINIFIED_CSS) {
+		echo '<link rel="stylesheet" type="text/css" href="/site/minified.css.php">';
+	} else {
+		foreach (glob('{site/*/*.css,site/*/*.css}', GLOB_BRACE) as $file) {
+			echo '<link rel="stylesheet" type="text/css" href="' . $file . '">';
+		}
+	}
 }
 
 /**
  * @desc - get minified JS
  */
 function get_scripts() {
-	echo '<script src="/site/minified.js.php"></script>';
+	if (USE_MINIFIED_JS) {
+		echo '<script type="text/javascript" src="/site/minified.js.php"></script>';
+	} else {
+		foreach (glob('{site/*/*.js,site/plugins/*/*.js}', GLOB_BRACE) as $file) {
+			echo '<script type="text/javascript" src="' . $file . '"></script>';
+		}
+	}
 }
 
 /**
