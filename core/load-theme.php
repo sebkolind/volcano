@@ -23,6 +23,8 @@ foreach ($req_theme_files as $filename) {
 /**
  * @desc - get theme file according to current page.
  */
+
+// If on a page, and template exists
 if (
 	url_params() &&
 	file_exists(TEMPLATES . '/' . url_params()[0] . '.php')
@@ -30,7 +32,7 @@ if (
 	include TEMPLATES . '/' . url_params()[0] . '.php';
 }
 
-// No page and custom home template
+// No page, but custom home template
 elseif (
 	!url_params() &&
 	USE_HOME_TEMPLATE
@@ -42,6 +44,7 @@ elseif (
 	}
 }
 
+// Else - require index.php
 else {
 	require THEME . "/index.php";
 }
