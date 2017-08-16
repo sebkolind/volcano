@@ -65,3 +65,4 @@ The only thing you have to do is use `get_stylesheets()` and `get_scripts()`. Ex
 </html>		
 ``` 
 
+_Both functions will only get minified if set to true in `/setup.php`, else they'll return multiple files._
