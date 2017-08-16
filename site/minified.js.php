@@ -22,7 +22,7 @@ function compress($minify) {
 /**
  * Getting all JS files in plugins
  */
-foreach (glob('*/*/*.js') as $file) {
+foreach (glob('plugins/*/*.js') as $file) {
 	if (filesize($file) > 0) {
 		include $file;
 	}

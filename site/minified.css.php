@@ -24,7 +24,7 @@ include './theme/styles.css';
 /**
  * Getting all styles in plugins
  */
-foreach (glob('*/*/*.css') as $file) {
+foreach (glob('plugins/*/*.css') as $file) {
 	if (filesize($file) > 0) {
 		include $file;
 	}
