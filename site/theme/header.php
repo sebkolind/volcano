@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<title>Volcano &mdash; <?php site_meta('title', true); ?></title>
 		<meta name="description" content="<?php site_meta('description', true); ?>">
-		<?php get_stylesheet(); ?>
+		<?php get_stylesheets(); ?>
 		<link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet">
 	</head>
 	<body class="<?php body_class(); ?>">
