@@ -7,6 +7,7 @@ Volcano is lightweight but the features included makes it powerful enough to run
 Even though Volcano ships with some powerful core features, you're not limited to those because of the seamlessly plugin environment.
 
 - No database
+- Lightweight & fast
 - You write content in beautiful markdown
 - Seamlessly plugin environment
 - Great with custom designs
