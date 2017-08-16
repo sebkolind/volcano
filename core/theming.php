@@ -27,38 +27,17 @@ function get_sidebar() {
 }
 
 /**
- * @desc - get minified styles, stylesheet based on filename or default styles.css
- * @param string $filename - the filename
+ * @desc - get minified styles
  */
-function get_stylesheet($filename = false) {
-	$filename = $filename ? $filename . '.css' : 'styles.css';
-
-	if (USE_MINIFIED_CSS) {
-		echo '<link rel="stylesheet" type="text/css" href="/site/minified.css.php">';
-	} else {
-		if (file_exists(ROOT . "/site/theme/$filename")) {
-			echo '<link rel="stylesheet" type="text/css" href="/site/theme/' . $filename . '.css">';
-		} else {
-			die("No CSS file named $filename was found in /site/theme");
-		}
-	}
+function get_stylesheet() {
+	echo '<link rel="stylesheet" type="text/css" href="/site/minified.css.php">';
 }
 
 /**
- * @desc - get minified JS or JS based on filename
- * @param string $filename - the filename
+ * @desc - get minified JS
  */
-function get_scripts($filename = false) {
-	if (USE_MINIFIED_JS) {
-        echo '<script src="/site/minified.js.php"></script>';
-	} else {
-		if (file_exists(ROOT . "/site/theme/${filename}.js")) {
-            echo '<script src="/site/theme/' . $filename . '.js"></script>';
-			echo '<link rel="stylesheet" type="text/css" href="/site/theme/' . $filename . '.js">';
-		} else {
-			die("No JS file named ${filename}.js was found in /site/theme");
-		}
-	}
+function get_scripts() {
+	echo '<script src="/site/minified.js.php"></script>';
 }
 
 /**
