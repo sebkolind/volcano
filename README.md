@@ -47,7 +47,7 @@ Partials live in a folder in `/site/theme` called `/partials`. Partial names sho
 To use a partial in your theme you call it by filename without `.php`. Example: `<?php get_partial('partial-name'); ?>`.
 
 ### CSS & JS
-All `.css` and `.js` files in `/site/theme` and `/site/plugins/*` is automatically minified and cached.
+All `.css` and `.js` files in `/site/theme` and `/site/plugins/*` are automatically minified and cached.
 The only thing you have to do is use `get_stylesheet()` and `get_scripts()`. Example:
 
 ```
