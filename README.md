@@ -48,13 +48,13 @@ To use a partial in your theme you call it by filename without `.php`. Example: 
 
 ### CSS & JS
 All `.css` and `.js` files in `/site/theme` and `/site/plugins/*` are automatically minified and cached.
-The only thing you have to do is use `get_stylesheet()` and `get_scripts()`. Example:
+The only thing you have to do is use `get_stylesheets()` and `get_scripts()`. Example:
 
 ```
 <!DOCTYPE html>
 <html>
   <head>
-    <?php get_stylesheet(); ?>
+    <?php get_stylesheets(); ?>
   </head>
   <body>
     ...
