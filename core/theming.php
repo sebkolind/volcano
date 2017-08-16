@@ -29,7 +29,7 @@ function get_sidebar() {
 /**
  * @desc - get minified styles
  */
-function get_stylesheet() {
+function get_stylesheets() {
 	echo '<link rel="stylesheet" type="text/css" href="/site/minified.css.php">';
 }
 
