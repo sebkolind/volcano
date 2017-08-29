@@ -23,6 +23,9 @@ Make a folder to run your site from. Example:
 
 `git clone https://github.com/sebastianks/volcano.git ~path/to/site/`
 
+## Setup
+There's some minimal settings for you to take care of in `setup.php` in the root of your site. There's some pretty understandable comments explaining each setting.
+
 ## Theming
 You always start off with a very basic theme that let's you know Volcano is running. 
 You can use this as a foundation for your theme, or you can delete everything and build your own.
