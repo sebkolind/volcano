@@ -36,5 +36,3 @@ function parse_markdown($filename = false, $nested_path = false) {
 
 	fclose($file);
 }
-
-?>
