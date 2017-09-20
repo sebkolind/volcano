@@ -5,7 +5,9 @@
  */
 
 header('Content-type: text/javascript');
-header('Cache-Control: max-age=604800, public'); # cache for 1 week
+if (!IS_DEV) {
+	header('Cache-Control: max-age=604800, public'); # cache for 1 week
+}
 
 ob_start("compress");
 
