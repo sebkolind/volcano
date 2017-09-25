@@ -8,7 +8,7 @@
 function plugin($name, $options = false) {
 	if (is_dir(SITE . "/plugins/$name")) {
 		if (!file_exists(SITE . "/plugins/$name/index.php")) {
-			die("The plugin \"$name\" does not have an index.php file");
+			die("The plugin '$name' does not have an index.php file");
 		}
 
 		include SITE . "/plugins/$name/index.php";
@@ -23,7 +23,7 @@ function plugin($name, $options = false) {
 			die("It seems like plugin '$name' misses: '$fnName()' function");
 		}
 	} else {
-		die("No plugin named $name exists in /site/plugins - should be a directory");
+		die("No plugin named '$name' exists in /site/plugins - should be a directory");
 	}
 }
 
