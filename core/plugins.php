@@ -6,7 +6,7 @@
  * @param string|array $options - options to give plugin
  */
 function plugin($name, $options = false) {
-	if (file_exists(SITE . "/plugins/$name")) {
+	if (is_dir(SITE . "/plugins/$name")) {
 		if (!file_exists(SITE . "/plugins/$name/index.php")) {
 			die("The plugin \"$name\" does not have an index.php file");
 		}
@@ -22,6 +22,8 @@ function plugin($name, $options = false) {
 		} else {
 			die("It seems like plugin '$name' misses: '$fnName()' function");
 		}
+	} else {
+		die("No plugin named $name exists in /site/plugins - should be a directory");
 	}
 }
 
