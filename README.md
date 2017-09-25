@@ -73,7 +73,7 @@ _Both functions will only get minified if set to true in `/setup.php`, else they
 
 ## Plugins
 Plugins in Volcano is easy to build and easy to use.
-Plugins are essentially a function that executes upon calling `plugin('plugin-name')` which could create a Facebook widget, a gallery or something else.
+Plugins are basically a function that executes upon calling `plugin('plugin-name')` which could create a Facebook widget, a gallery or something else.
 
 The requirements for a plugin is:
 
