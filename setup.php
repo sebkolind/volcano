@@ -23,8 +23,12 @@ define('USE_HOME_TEMPLATE', true);
  * @desc - true: show errors
  * 		   false - don't show errors.
  * Should be false when your site is live
+ * By setting to true, you'll get error messages and
+ * your CSS and JS will not cache, which makes it easier
+ * for you to make a theme for instance. If set to false, you have to
+ * hard refresh the browser everytime you change something i .css or .js files.
  */
-define('IS_DEV', false);
+define('IS_DEV', true);
 
 /**
  * @desc - use minified CSS or not
