@@ -85,9 +85,8 @@ To call a plugin from your theme files use:
 
 `plugin('google-analytics');`
 
-The `plugin('plugin-name', $options)` function takes a second argument which is passed to the `googleAnalytics()` function. The second argument is used to pass options to your plugin. This could be a single value like an id or an array. `$options` is default to `false`, and is not needed if your plugin doesn't need it.
+The `plugin('google-analytics', $options)` function takes a second argument which is passed to the `googleAnalytics()` function. The second argument is used to pass options to your plugin. This could be a single value like an id or an array. `$options` is default to `false`, and is not needed if your plugin doesn't need it.
 
-Volcano ships with 2 plugins installed by default: `fb-page-plugin` and `google-analytics`. Use those as a guideline if you would like to write a plugin.
+Use `fb-page-plugin` and `google-analytics` as guidelines on how to write a plugin in Volcano. A more detailed guide will be written soon. Feel free to take contact if you need help. Also - if you don't need the plugins, you can delete them.
 
-Your plugin could have `.css` and `.js` files, and would automatically be added to the front-end. Read the section "CSS & JS" for more information.
-
+Your plugin can have `.css` and `.js` files, and will automatically be added to the front-end. Read the section "CSS & JS" for more information.
