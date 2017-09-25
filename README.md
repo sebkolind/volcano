@@ -1,5 +1,5 @@
 # Volcano
-A lightweight flatfile CMS written in PHP.
+A lightweight flat file CMS written in PHP.
 Volcano was built to help you built fast and custom websites without headaches.
 
 ## Features
