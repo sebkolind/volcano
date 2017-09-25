@@ -4,12 +4,12 @@ Volcano was built to help you built fast and custom websites without headaches.
 
 ## Features
 Volcano is lightweight but the features included makes it powerful enough to run small to medium websites.
-Even though Volcano ships with some powerful core features, you're not limited to those because of the seamlessly plugin environment.
+Even though Volcano ships with some powerful core features, you're not limited to those because of the built-in plugin environment.
 
 - No database
 - Lightweight & fast
-- You write content in beautiful markdown
-- Seamlessly plugin environment
+- You write your content in beautiful markdown
+- Esay-to-use plugin environment
 - Great with custom designs
 - Built-in caching & minifying of JS and CSS
 
