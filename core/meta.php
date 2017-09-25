@@ -65,13 +65,12 @@ function site_meta($needle = false, $print = false) {
 
 		// Title
 		if (
-			strpos($value, 'Title') !== false ||
-			strpos($value, 'title') !== false
+			stripos($value, 'Title') !== false
 		) {
 			$meta['title'] =
 			trim(
-				str_replace(
-					array('Title:', 'title:'),
+				str_ireplace(
+					'Title:',
 					'',
 					$value
 				)
@@ -80,13 +79,12 @@ function site_meta($needle = false, $print = false) {
 
 		// Description
 		if (
-			strpos($value, 'Description') !== false ||
-			strpos($value, 'description') !== false
+			stripos($value, 'Description') !== false
 		) {
 			$meta['description'] =
 			trim(
-				str_replace(
-					array('Description:', 'description:'),
+				str_ireplace(
+					'Description:',
 					'',
 					$value
 				)
