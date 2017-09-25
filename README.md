@@ -79,7 +79,7 @@ The requirements for a plugin is:
 
 - A folder inside `/site/plugins/` where your plugin lives. Example: `/site/plugins/google-analytics/`
 - Inside that folder you need at least `index.php`
-- `index.php` requires a function named your folder name in camelCase. Example: `function googleAnalytics() { ... }`
+- `index.php` requires a function with the same name as the folder _but_ in camelCase. Example: `function googleAnalytics() { ... }`
 
 To call a plugin from your theme files use:
 
