@@ -70,3 +70,22 @@ The only thing you have to do is use `get_stylesheets()` and `get_scripts()`. Ex
 ``` 
 
 _Both functions will only get minified if set to true in `/setup.php`, else they'll return multiple files._
+
+## Plugins
+Plugins in Volcano is easy to build and easy to use.
+Plugins are essentially a function that executes upon calling `plugin('plugin-name')` which could create a Facebook widget, a gallery or something else.
+
+The requirements for a plugin is:
+
+- A folder inside `/site/plugins/` where your plugin lives. Example: `/site/plugins/google-analytics/`
+- Inside that folder you need at least `index.php`
+- `index.php` requires a function named your folder name in camelCase. Example: `function googleAnalytics() { ... }`
+
+To call a plugin from your theme files use:
+
+`plugin('google-analytics');`
+
+The `plugin('plugin-name', $options)` function takes a second argument which is passed to the `googleAnalytics()` function. The second argument is used to pass options to your plugin. This could be a single value like an id or an array. `$options` is default to `false`, and is not needed if your plugin doesn't need it.
+
+Volcano ships with 2 plugins installed by default: `fb-page-plugin` and `google-analytics`. Use those as a guideline if you would like to write a plugin.
+
