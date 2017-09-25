@@ -30,7 +30,7 @@ define('USE_HOME_TEMPLATE', true);
  * By setting to true, you'll get error messages and
  * your CSS and JS will not cache, which makes it easier
  * for you to make a theme for instance. If set to false, you have to
- * hard refresh the browser everytime you change something i .css or .js files.
+ * hard refresh the browser everytime you change .css or .js files.
  */
 define('IS_DEV', false);
 
