@@ -89,3 +89,5 @@ The `plugin('plugin-name', $options)` function takes a second argument which is 
 
 Volcano ships with 2 plugins installed by default: `fb-page-plugin` and `google-analytics`. Use those as a guideline if you would like to write a plugin.
 
+Your plugin could have `.css` and `.js` files, and would automatically be added to the front-end. Read the section "CSS & JS" for more information.
+
