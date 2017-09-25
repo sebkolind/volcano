@@ -9,7 +9,7 @@ Even though Volcano ships with some powerful core features, you're not limited t
 - No database
 - Lightweight & fast
 - You write your content in beautiful markdown
-- Esay-to-use plugin environment
+- Easy-to-use plugin environment
 - Great with custom designs
 - Built-in caching & minifying of JS and CSS
 
