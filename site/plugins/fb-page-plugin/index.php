@@ -22,8 +22,8 @@ function fbPagePlugin($options = false) {
 	 * allows user to actually set attributes.
 	 * If no $options given, use defaults
 	 */
-	$options = $options 
-		? array_merge($defaults, $options) 
+	$options = $options
+		? array_merge($defaults, $options)
 		: $defaults;
 
 	?>
@@ -38,5 +38,5 @@ function fbPagePlugin($options = false) {
 			data-small-header="<?php echo $options['small_header']; ?>"
 			data-adapt-container-width="<?php echo $options['adapt_container_width']; ?>">
 		</div>
-	<?
+	<?php
 }
