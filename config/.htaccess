@@ -1,0 +1,8 @@
+Options +FollowSymLinks
+RewriteEngine On
+
+# Ignore existing directories (!-d) and files (!-f)
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
+
+RewriteRule ^(.*)$ /index.php
