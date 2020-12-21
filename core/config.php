@@ -4,8 +4,6 @@ require 'vendor/autoload.php';
 
 date_default_timezone_set('Europe/Copenhagen');
 
-require './setup.php';
-
 if (IS_DEV) {
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
@@ -25,5 +23,3 @@ if (!file_exists(PAGES . '/default.md')) {
 }
 
 require 'load-theme.php';
-
-?>

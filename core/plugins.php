@@ -26,5 +26,3 @@ function plugin($name, $options = false) {
         die("No plugin named '$name' exists in /site/plugins - should be a directory");
     }
 }
-
-?>

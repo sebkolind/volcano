@@ -29,28 +29,20 @@ function get_sidebar() {
 }
 
 /**
- * @desc - get minified styles
+ * @desc - get styles in site and plugins
  */
 function get_stylesheets() {
-    if (USE_MINIFIED_CSS) {
-        echo '<link rel="stylesheet" type="text/css" href="/site/minified.css.php">';
-    } else {
-        foreach (glob('{site/*/*.css,site/*/*.css}', GLOB_BRACE) as $file) {
-            echo '<link rel="stylesheet" type="text/css" href="' . $file . '">';
-        }
+    foreach (glob('{site/theme/*.css,site/plugins/*/*.css}', GLOB_BRACE) as $file) {
+        echo '<link rel="stylesheet" type="text/css" href="' . $file . '">';
     }
 }
 
 /**
- * @desc - get minified JS
+ * @desc - get JS in site and plugins
  */
 function get_scripts() {
-    if (USE_MINIFIED_JS) {
-        echo '<script type="text/javascript" src="/site/minified.js.php"></script>';
-    } else {
-        foreach (glob('{site/*/*.js,site/plugins/*/*.js}', GLOB_BRACE) as $file) {
-            echo '<script type="text/javascript" src="' . $file . '"></script>';
-        }
+    foreach (glob('{site/theme/*.js,site/plugins/*/*.js}', GLOB_BRACE) as $file) {
+        echo '<script type="text/javascript" src="' . $file . '"></script>';
     }
 }
 

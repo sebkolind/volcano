@@ -1,7 +1,5 @@
 <?php
-/**
- * This file should not contain anything else
- * but the line below this comment
- */
+
+define('ROOT', dirname(__FILE__));
 
 require 'core/config.php';

@@ -30,5 +30,3 @@ function generate_nav($items, $item_sep = '', $item_tag = '', $tag = 'nav') {
     }
     echo '</' . $tag . '>';
 }
-
-?>
