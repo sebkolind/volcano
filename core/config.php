@@ -1,8 +1,8 @@
 <?php
 
-date_default_timezone_set('Europe/Copenhagen');
+require 'vendor/autoload.php';
 
-require_once 'vendor/Parsedown.php';
+date_default_timezone_set('Europe/Copenhagen');
 
 require './setup.php';
 
