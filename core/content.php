@@ -9,9 +9,9 @@
  * @return parsed markdown as html
  */
 function content() {
-	if (!url_params()) {
-		parse_markdown();
-	} else {
-		parse_markdown(url_params()[0]);
-	}
+    if (!url_params()) {
+        parse_markdown();
+    } else {
+        parse_markdown(url_params()[0]);
+    }
 }
