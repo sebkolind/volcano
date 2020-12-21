@@ -8,106 +8,75 @@
  * @return - all meta data or specific
  */
 function site_meta($needle = false, $print = false) {
-	if (
-		url_params() &&
-		file_exists(TEMPLATES . '/' . url_params()[0] . '.php')
-	) {
-		$filepath = TEMPLATES . '/' . url_params()[0] . '.php';
+    if (url_params() && file_exists(TEMPLATES . '/' . url_params()[0] . '.php')) {
+        $filepath = TEMPLATES . '/' . url_params()[0] . '.php';
+    } elseif (!url_params() && USE_HOME_TEMPLATE && file_exists(TEMPLATES . '/home.php')) {
+        $filepath = TEMPLATES . '/home.php';
+    } elseif (!url_params()) {
+        $filepath = PAGES . '/default.md';
+    } else {
+        $filepath = PAGES . '/' . url_params()[0] . '.md';
+    }
 
-	} elseif (
-		!url_params() &&
-		USE_HOME_TEMPLATE &&
-		file_exists(TEMPLATES . '/home.php')
-	) {
-		$filepath = TEMPLATES . '/home.php';
+    $extension = pathinfo($filepath, PATHINFO_EXTENSION);
 
-	} elseif (!url_params()) {
-		$filepath = PAGES . '/default.md';
+    if (!file_exists($filepath)) {
+        $filepath = PAGES . '/404.md';
+    }
 
-	} else {
-		$filepath = PAGES . '/' . url_params()[0] . '.md';
-	}
+    $file = file_get_contents($filepath);
 
-	$extension = pathinfo($filepath, PATHINFO_EXTENSION);
+    $meta = [];
 
-	if (!file_exists($filepath)) {
-		$filepath = PAGES . '/404.md';
-	}
+    if ($extension === 'md') {
+        if (strpos($file, '<!--') !== false) {
+            $file = str_replace(["\r\n", "\r", "\n"], '', $file);
+            preg_match('/<!--(.*)-->/', $file, $match);
 
-	$file = file_get_contents($filepath);
+            $arr = explode('*', implode($match));
+        }
+    }
 
-	$meta = array();
+    if ($extension === 'php') {
+        foreach (token_get_all($file) as $token) {
+            if (is_array($token) && token_name($token[0]) === 'T_DOC_COMMENT') {
+                $arr = explode('*', $token[1]);
+            }
+        }
+    }
 
-	if ($extension === 'md') {
-		if (strpos($file, '<!--') !== false) {
-			$file = str_replace(array("\r\n", "\r", "\n"), '', $file);
-			preg_match('/<!--(.*)-->/', $file, $match);
+    foreach ($arr as $value) {
+        if ($value === '') {
+            continue;
+        }
 
-			$arr = explode('*', implode($match));
-		}
-	}
+        // Title
+        if (stripos($value, 'Title') !== false) {
+            $meta['title'] = trim(str_ireplace('Title:', '', $value));
+        }
 
-	if ($extension === 'php') {
-		foreach (token_get_all($file) as $token) {
-			if (
-				is_array($token) &&
-				token_name($token[0]) === 'T_DOC_COMMENT'
-			) {
-				$arr = explode('*', $token[1]);
-			}
-		}
-	}
+        // Description
+        if (stripos($value, 'Description') !== false) {
+            $meta['description'] = trim(str_ireplace('Description:', '', $value));
+        }
+    }
 
-	foreach ($arr as $value) {
-		if ($value === '') {
-			continue;
-		}
+    if ($needle) {
+        $needle = strtolower($needle);
 
-		// Title
-		if (
-			stripos($value, 'Title') !== false
-		) {
-			$meta['title'] =
-			trim(
-				str_ireplace(
-					'Title:',
-					'',
-					$value
-				)
-			);
-		}
+        if (array_key_exists($needle, $meta)) {
+            if ($print) {
+                echo $meta[$needle];
+            }
+            return $meta[$needle];
+        } else {
+            return '';
+        }
+    }
 
-		// Description
-		if (
-			stripos($value, 'Description') !== false
-		) {
-			$meta['description'] =
-			trim(
-				str_ireplace(
-					'Description:',
-					'',
-					$value
-				)
-			);
-		}
-	}
+    if ($print) {
+        echo $meta;
+    }
 
-	if ($needle) {
-		$needle = strtolower($needle);
-
-		if (array_key_exists($needle, $meta)) {
-			if ($print) {
-				echo $meta[$needle];
-			}
-			return $meta[$needle];
-		} else {
-			return '';
-		}
-	}
-
-	if ($print) {
-		echo $meta;
-	}
-
-	return $meta;
+    return $meta;
 }

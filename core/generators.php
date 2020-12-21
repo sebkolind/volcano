@@ -7,28 +7,28 @@
  * @param string $tag - the HTML tag for the wrapper
  */
 function generate_nav($items, $item_sep = '', $item_tag = '', $tag = 'nav') {
-	$total_items = count($items);
-	$i = 1;
+    $total_items = count($items);
+    $i = 1;
 
-	echo '<' . $tag . '>';
-	foreach ($items as $title => $link) {
-		if ($item_tag) {
-			echo '<' . $item_tag . '>';
-		}
+    echo '<' . $tag . '>';
+    foreach ($items as $title => $link) {
+        if ($item_tag) {
+            echo '<' . $item_tag . '>';
+        }
 
-		echo '<a href="' . $link . '">' . $title . '</a>';
+        echo '<a href="' . $link . '">' . $title . '</a>';
 
-		if ($item_sep && $i < $total_items) {
-			echo $item_sep;
-		}
+        if ($item_sep && $i < $total_items) {
+            echo $item_sep;
+        }
 
-		if ($item_tag) {
-			echo '</' . $item_tag . '>';
-		}
+        if ($item_tag) {
+            echo '</' . $item_tag . '>';
+        }
 
-		$i++;
-	}
-	echo '</' . $tag . '>';
+        $i++;
+    }
+    echo '</' . $tag . '>';
 }
 
 ?>
