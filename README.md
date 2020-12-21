@@ -21,7 +21,7 @@ mkdir ~/path/to/project
 cd ~/path/to/project
 
 touch index.php
-echo '<?php require 'setup.php' ?>' >> index.php
+echo "<?php require 'setup.php' ?>" >> index.php
 
 composer require sebastianks/volcano
 
