@@ -1,58 +1,60 @@
 # Volcano
-A lightweight flat file CMS written in PHP.
-Volcano was built to help you built fast and custom websites without headaches.
+
+An extendable & lightweight flat file blog and website constructor.
 
 ## Features
-Volcano is lightweight but the features included makes it powerful enough to run small to medium websites.
-Even though Volcano ships with some powerful core features, you're not limited to those because of the built-in plugin environment.
 
 - No database
 - Lightweight & fast
 - You write your content in beautiful markdown
 - Easy-to-use plugin environment
 - Great with custom designs
-- Built-in caching & minifying of JS and CSS
 
 ## Requirements
+
 A server running PHP.
 
 ## Get started
-Make a folder to run your site from. Example:
 
-`mkdir ~path/to/site/`
+```bash
+composer require sebastianks/volcano
 
-`git clone https://github.com/sebastianks/volcano.git ~path/to/site/`
-
-## Setup
-There's some minimal settings for you to take care of in `setup.php` in the root of your site. There's some pretty understandable comments explaining each setting.
+# IMPORTANT
+# copy initial configuration and site to your project
+# if you don't do this you *have* to set these things up manually.
+cd ~/path/to/site/
+cp vendor/sebastianks/volcano/config/setup.php .
+cp -R vendor/sebastianks/volcano/config/site .
+```
 
 ## Theming
-You always start off with a very basic theme that let's you know Volcano is running. 
-You can use this as a foundation for your theme, or you can delete everything and build your own.
 
 There are some minimum requirements for your theme to run. That is:
 
 - The `theme` folder in `/site/` (obviously)
 - Inside `/site/theme` you need the following files:
-	- header.php
-	- footer.php
-	- index.php
+  - header.php
+  - footer.php
+  - index.php
 - That's it!
 
 ### Templates
-A template is a `.php` file that let's you create a custom layout for a specific page on your site.
+
+A template is a file that let's you create a custom layout for a specific page on your site.
 
 Templates live in a folder in `/site/theme/` called `/templates`. A template file equals the page name. 
 Page `yoursite.com/about-me` requires a template file called `about-me.php`.
 
 ### Partials
+
 In adition to templates you have partials. A partial is a piece of code that you find yourself reusing.
 
 Partials live in a folder in `/site/theme` called `/partials`. Partial names should be a-Z, 0-9 and `.php` files.
 To use a partial in your theme you call it by filename without `.php`. Example: `<?php get_partial('partial-name'); ?>`.
 
 ### CSS & JS
-All `.css` and `.js` files in `/site/theme` and `/site/plugins/*` are automatically minified and cached.
+
+All `.css` and `.js` files in `/site/theme` and `/site/plugins` are automatically loaded.
 The only thing you have to do is use `get_stylesheets()` and `get_scripts()`. Example:
 
 ```
@@ -66,13 +68,15 @@ The only thing you have to do is use `get_stylesheets()` and `get_scripts()`. Ex
 
     <?php get_scripts(); ?>
   </body>
-</html>		
-``` 
+</html>   
+```
 
-_Both functions will only get minified if set to true in `/setup.php`, else they'll return multiple files._
+Each file will be loaded and added to the DOM individually one after another.
 
 ## Plugins
+
 Plugins in Volcano is easy to build and easy to use.
+
 Plugins are basically a function that executes upon calling `plugin('plugin-name')` which could create a Facebook widget, a gallery or something else.
 
 The requirements for a plugin is:
@@ -86,7 +90,5 @@ To call a plugin from your theme files use:
 `plugin('google-analytics');`
 
 The `plugin()` function takes two arguments. First is the name. Second argument is passed to the plugin root function, like: `googleAnalytics($id)`. The second argument is used to pass options to your plugin. This could be a single value, like in this case, an id, or an array of options. `$options` is default to `false`, and is not needed if your plugin doesn't need it.
-
-Use `fb-page-plugin` and `google-analytics` as guidelines on how to write a plugin in Volcano. A more detailed guide will be written soon. Feel free to take contact if you need help. Also - if you don't need the plugins, you can delete them.
 
 Your plugin can have `.css` and `.js` files, and will automatically be added to the front-end. Read the section "CSS & JS" for more information.

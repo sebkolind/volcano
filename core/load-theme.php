@@ -38,5 +38,3 @@ elseif (!url_params() && USE_HOME_TEMPLATE) {
 else {
     require THEME . '/index.php';
 }
-
-?>
