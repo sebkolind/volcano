@@ -32,7 +32,7 @@ define('USE_HOME_TEMPLATE', true);
  * for you to make a theme for instance. If set to false, you have to
  * hard refresh the browser everytime you change .css or .js files.
  */
-define('IS_DEV', false);
+define('IS_DEV', true);
 
 /**
  * @desc - use minified CSS or not
