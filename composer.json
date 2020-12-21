@@ -1,0 +1,6 @@
+{
+    "name": "sebastianks/volcano",
+    "require": {
+        "erusev/parsedown": "^1.7"
+    }
+}
