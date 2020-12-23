@@ -30,7 +30,7 @@ define('USE_HOME_TEMPLATE', false);
  *
  * By setting to true, you'll get error messages.
  */
-define('IS_DEV', true);
+define('IS_DEV', false);
 
 // require volcano
 require './vendor/sebastianks/volcano/index.php';
