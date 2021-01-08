@@ -1,8 +1,7 @@
 <?php
 
 /**
- * @desc - get meta from a .php or .md file. Meta data is written in a
-  	comment section of the file.
+ * @desc - get meta from a .php or .md file. Meta data is written in comment section of the file.
  * @param string $needle - get specific meta
  * @param boolean $print - return or echo value
  * @return - all meta data or specific
