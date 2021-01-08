@@ -4,11 +4,11 @@ An extendable & lightweight flat file blog and website constructor.
 
 ## Features
 
-- No database
-- Lightweight & fast
-- You write your content in beautiful markdown
-- Easy-to-use plugin environment
-- Great with custom designs
+-   No database
+-   Lightweight & fast
+-   You write your content in beautiful markdown
+-   Easy-to-use plugin environment
+-   Great with custom designs
 
 ## Requirements
 
@@ -37,18 +37,18 @@ cp -R vendor/sebastianks/volcano/config/* .
 
 There are some minimum requirements for your theme to run. That is:
 
-- The `theme` folder in `/site/` (obviously)
-- Inside `/site/theme` you need the following files:
-  - header.php
-  - footer.php
-  - index.php
-- That's it!
+-   The `theme` folder in `/site/` (obviously)
+-   Inside `/site/theme` you need the following files:
+    -   header.php
+    -   footer.php
+    -   index.php
+-   That's it!
 
 ### Templates
 
 A template is a file that let's you create a custom layout for a specific page on your site.
 
-Templates live in a folder in `/site/theme/` called `/templates`. A template file equals the page name. 
+Templates live in a folder in `/site/theme/` called `/templates`. A template file equals the page name.
 Page `yoursite.com/about-me` requires a template file called `about-me.php`.
 
 ### Partials
@@ -74,7 +74,7 @@ The only thing you have to do is use `get_stylesheets()` and `get_scripts()`. Ex
 
     <?php get_scripts(); ?>
   </body>
-</html>   
+</html>
 ```
 
 Each file will be loaded and added to the DOM individually one after another.
@@ -87,9 +87,9 @@ Plugins are basically a function that executes upon calling `plugin('plugin-name
 
 The requirements for a plugin is:
 
-- A folder inside `/site/plugins/` where your plugin lives. Example: `/site/plugins/google-analytics/`
-- Inside that folder you need at least `index.php`
-- `index.php` requires a function with the same name as the folder _but_ in camelCase. Example: `function googleAnalytics() { ... }`
+-   A folder inside `/site/plugins/` where your plugin lives. Example: `/site/plugins/google-analytics/`
+-   Inside that folder you need at least `index.php`
+-   `index.php` requires a function with the same name as the folder _but_ in camelCase. Example: `function googleAnalytics() { ... }`
 
 To call a plugin from your theme files use:
 
