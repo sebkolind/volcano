@@ -1,5 +1,6 @@
 {
     "name": "sebastianks/volcano",
+    "license": "MIT",
     "require": {
         "erusev/parsedown": "^1.7"
     }
