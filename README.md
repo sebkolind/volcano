@@ -53,7 +53,8 @@ site
 Which will allow you to access posts like this:
 
 ```bash
-site/posts/sub1/my-post-in-sub1.md -> /sub1/my-post-in-sub1.md
+site/posts/sub1/my-post-in-sub1.md -> /sub1/my-post-in-sub1
+site/posts/post-not-in-sub.md -> /post-not-in-sub
 ```
 
 ## Theming
