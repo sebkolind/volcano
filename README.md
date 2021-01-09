@@ -59,7 +59,7 @@ site/posts/post-not-in-sub.md -> /post-not-in-sub
 
 ## Meta data
 
-Both pages and posts allow for adding meta data like title, description and keywords directly in the Markdown file like this:
+Both pages and posts enables you to add meta data like title, description and keywords directly in the Markdown file like this:
 
 ```md
 <!--
@@ -72,7 +72,7 @@ Both pages and posts allow for adding meta data like title, description and keyw
 
 These can easily be retrieved with the helper method [site_meta](https://github.com/sebastianks/volcano/blob/master/core/meta.php#L10) to use in your theme like so:
 
-```html
+```php
 <title>Volcano &mdash; <?php site_meta('title', true); ?></title>
 <meta name="description" content="<?php site_meta('description', true); ?>" />
 ```
