@@ -5,23 +5,22 @@ An extendable & lightweight flat file blog and website constructor.
 ## Features
 
 -   No database
--   Lightweight & fast
+-   Lightweight, extendable & fast
 -   You write your content in beautiful markdown
 -   Easy-to-use plugin environment
 -   Great with custom designs
 
 ## Requirements
 
-A server running PHP.
+A server running PHP 7 or higher.
+
+Might run on older PHP versions but those are not tested.
 
 ## Get started
 
 ```bash
 mkdir ~/path/to/project
 cd ~/path/to/project
-
-touch index.php
-echo "<?php require 'setup.php' ?>" >> index.php
 
 composer require sebastianks/volcano
 
@@ -31,6 +30,30 @@ composer require sebastianks/volcano
 cd ~/path/to/project/
 cp vendor/sebastianks/volcano/config/.htaccess .
 cp -R vendor/sebastianks/volcano/config/* .
+```
+
+## Posts
+
+Write blog posts in an easy and straightforward way with Posts. All you do is put your Markdown files in the `/site/posts/` directory and you are good to go!
+
+Organize your posts in sub-directories like so:
+
+```bash
+site
+    posts
+        sub1
+            my-post-in-sub1.md
+        sub2
+            another-nested-post.md
+            this-is-second-post.md
+    post-not-in-sub.md
+    another-not-in-sub-post.md
+```
+
+Which will allow you to access posts like this:
+
+```bash
+site/posts/sub1/my-post-in-sub1.md -> /sub1/my-post-in-sub1.md
 ```
 
 ## Theming
@@ -53,7 +76,7 @@ Page `yoursite.com/about-me` requires a template file called `about-me.php`.
 
 ### Partials
 
-In adition to templates you have partials. A partial is a piece of code that you find yourself reusing.
+In addition to templates you have partials. A partial is a piece of code that you find yourself reusing.
 
 Partials live in a folder in `/site/theme` called `/partials`. Partial names should be a-Z, 0-9 and `.php` files.
 To use a partial in your theme you call it by filename without `.php`. Example: `<?php get_partial('partial-name'); ?>`.

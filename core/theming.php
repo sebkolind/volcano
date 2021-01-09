@@ -53,7 +53,8 @@ function body_class() {
     if (is_home()) {
         echo 'is-home home';
     } else {
-        echo 'is-page page-' . url_params()[0];
+        $page_or_post = is_post() ? 'is-post post-' : 'is-page page-';
+        echo $page_or_post . implode('-', url_params());
     }
 }
 

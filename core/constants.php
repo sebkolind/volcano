@@ -11,5 +11,6 @@ if (!defined('SITE')) {
 }
 
 define('PAGES', SITE . '/pages');
+define('POSTS', SITE . '/posts');
 define('THEME', SITE . '/theme');
 define('TEMPLATES', THEME . '/templates');
