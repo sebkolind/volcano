@@ -57,6 +57,26 @@ site/posts/sub1/my-post-in-sub1.md -> /sub1/my-post-in-sub1
 site/posts/post-not-in-sub.md -> /post-not-in-sub
 ```
 
+## Meta data
+
+Both pages and posts allow for adding meta data like title, description and keywords directly in the Markdown file like this:
+
+```md
+<!--
+* Title: My blog post
+* Description: I am just a regular blog post.
+-->
+
+## My blog post
+```
+
+These can easily be retrieved with the helper method [site_meta](https://github.com/sebastianks/volcano/blob/master/core/meta.php#L10) to use in your theme like so:
+
+```html
+<title>Volcano &mdash; <?php site_meta('title', true); ?></title>
+<meta name="description" content="<?php site_meta('description', true); ?>" />
+```
+
 ## Theming
 
 There are some minimum requirements for your theme to run. That is:
