@@ -72,9 +72,15 @@ Both pages and posts enables you to add meta data like title, description and ke
 
 These can easily be retrieved with the helper method [site_meta](https://github.com/sebastianks/volcano/blob/master/core/meta.php#L10) to use in your theme like so:
 
-```php
-<title>Volcano &mdash; <?php site_meta('title', true); ?></title>
-<meta name="description" content="<?php site_meta('description', true); ?>" />
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Volcano &mdash; <?php site_meta('title', true); ?></title>
+        <meta name="description" content="<?php site_meta('description', true); ?>" />
+    </head>
+    <body class="<?php body_class(); ?>"></body>
+</html>
 ```
 
 ## Theming
