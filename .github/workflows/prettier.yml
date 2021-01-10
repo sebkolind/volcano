@@ -18,7 +18,7 @@ jobs:
         ref: ${{ github.head_ref }}
 
     - name: Prettify code
-      uses: sebastianks/prettier_action@0.0.3
+      uses: sebastianks/prettier_action@0.0.4
       with:
         dry: True
         prettier_options: --write **/*{.php,.md,.js,.css,.html}
