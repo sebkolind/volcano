@@ -17,10 +17,7 @@ jobs:
       with:
         ref: ${{ github.head_ref }}
 
-    - name: Install prettier-php
-      run: npm install --global @prettier/plugin-php
-
     - name: Prettify code
-      uses: creyD/prettier_action@v3.1
+      uses: sebastianks/prettier_action
       with:
         prettier_options: --check **/*{.php,.md,.js,.css,.html}
