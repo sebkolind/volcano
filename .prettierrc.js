@@ -8,4 +8,5 @@ module.exports = {
     bracketSpacing: false,
     arrowParens: 'always',
     endOfLine: 'lf',
+    braceStyle: '1tbs',
 };
