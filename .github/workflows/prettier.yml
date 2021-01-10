@@ -21,5 +21,5 @@ jobs:
       uses: sebastianks/prettier_action@0.0.2
       with:
         dry: True
-        prettier_options: --check **/*{.php,.md,.js,.css,.html}
+        prettier_options: --write **/*{.php,.md,.js,.css,.html}
         prettier_plugins: '@prettier/plugin-php'
