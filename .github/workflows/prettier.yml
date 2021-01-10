@@ -21,3 +21,4 @@ jobs:
       uses: sebastianks/prettier_action@0.0.1
       with:
         prettier_options: --check **/*{.php,.md,.js,.css,.html}
+        prettier_plugins: @prettier/plugin-php
