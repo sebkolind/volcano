@@ -20,4 +20,4 @@ jobs:
     - name: Prettify code
       uses: creyD/prettier_action@v3.1
       with:
-        prettier_options: --check **/*.{.php,.md,.js,.css,.html}
+        prettier_options: --check **/*{.php,.md,.js,.css,.html}
