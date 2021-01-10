@@ -16,6 +16,9 @@ jobs:
     - uses: actions/checkout@v2
       with:
         ref: ${{ github.head_ref }}
+        
+    - name: Install prettier-php
+      run: npm install @prettier/plugin-php
 
     - name: Prettify code
       uses: creyD/prettier_action@v3.1
