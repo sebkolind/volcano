@@ -29,8 +29,8 @@ composer require sebastianks/volcano
 # copy initial configuration and site to your project
 # if you don't do this you *have* to set these things up manually.
 cd ~/path/to/project/
-cp vendor/sebastianks/volcano/config/.htaccess .
-cp -R vendor/sebastianks/volcano/config/* .
+cp vendor/sebastianks/volcano/setup/.htaccess .
+cp -R vendor/sebastianks/volcano/setup/* .
 ```
 
 ## Theming
