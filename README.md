@@ -5,14 +5,16 @@ An extendable & lightweight flat file blog and website constructor.
 ## Features
 
 -   No database
--   Lightweight & fast
+-   Lightweight, extendable & fast
 -   You write your content in beautiful markdown
 -   Easy-to-use plugin environment
 -   Great with custom designs
 
 ## Requirements
 
-A server running PHP.
+A server running PHP 7 or higher.
+
+Might run on older PHP versions but those are not tested.
 
 ## Get started
 
@@ -20,17 +22,73 @@ A server running PHP.
 mkdir ~/path/to/project
 cd ~/path/to/project
 
-touch index.php
-echo "<?php require 'setup.php' ?>" >> index.php
-
 composer require sebastianks/volcano
 
 # IMPORTANT
 # copy initial configuration and site to your project
 # if you don't do this you *have* to set these things up manually.
+# NOTE: The copy method might vary from OS
 cd ~/path/to/project/
-cp vendor/sebastianks/volcano/config/.htaccess .
-cp -R vendor/sebastianks/volcano/config/* .
+cp -r vendor/sebastianks/volcano/setup/* .
+```
+
+Easy, right?
+
+### Wanna get started even quicker?
+
+You can try one of the official templates available. This gives you opinionated and up-to-date templates that will get you started right away. Found an issue with a template? Please, submit an issue on the corresponding repository.
+
+-   [Blog](https://github.com/sebastianks/volcano-blog-template)
+
+## Posts
+
+Write blog posts in an easy and straightforward way with Posts. All you do is put your Markdown files in the `/site/posts/` directory and you are good to go!
+
+Organize your posts in sub-directories like so:
+
+```bash
+site
+    posts
+        sub1
+            my-post-in-sub1.md
+        sub2
+            another-nested-post.md
+            this-is-second-post.md
+    post-not-in-sub.md
+    another-not-in-sub-post.md
+```
+
+Which will allow you to access posts like this:
+
+```bash
+site/posts/sub1/my-post-in-sub1.md -> /sub1/my-post-in-sub1
+site/posts/post-not-in-sub.md -> /post-not-in-sub
+```
+
+## Meta data
+
+Both pages and posts enables you to add meta data like title, description and keywords directly in the Markdown file like this:
+
+```md
+<!--
+* Title: My blog post
+* Description: I am just a regular blog post.
+-->
+
+## My blog post
+```
+
+These can easily be retrieved with the helper method [site_meta](https://github.com/sebastianks/volcano/blob/master/core/meta.php#L10) to use in your theme like so:
+
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Volcano &mdash; <?php site_meta('title', true); ?></title>
+        <meta name="description" content="<?php site_meta('description', true); ?>" />
+    </head>
+    <body class="<?php body_class(); ?>"></body>
+</html>
 ```
 
 ## Theming
@@ -53,7 +111,7 @@ Page `yoursite.com/about-me` requires a template file called `about-me.php`.
 
 ### Partials
 
-In adition to templates you have partials. A partial is a piece of code that you find yourself reusing.
+In addition to templates you have partials. A partial is a piece of code that you find yourself reusing.
 
 Partials live in a folder in `/site/theme` called `/partials`. Partial names should be a-Z, 0-9 and `.php` files.
 To use a partial in your theme you call it by filename without `.php`. Example: `<?php get_partial('partial-name'); ?>`.

@@ -1,0 +1,25 @@
+name: Prettier
+
+on:
+  push:
+    branches: [ master, next ]
+  pull_request:
+    branches: [ master, next ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.head_ref }}
+
+    - name: Prettify code
+      uses: creyD/prettier_action@v3.3 
+      with:
+        dry: True
+        prettier_options: --write **/*{.php,.md,.js,.css,.html}
+        prettier_plugins: '@prettier/plugin-php'

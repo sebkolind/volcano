@@ -15,6 +15,7 @@ require 'meta.php';
 require 'utilities.php';
 require 'markdown.php';
 require 'content.php';
+require 'posts.php';
 require 'plugins.php';
 require 'generators.php';
 
