@@ -32,6 +32,14 @@ cd ~/path/to/project/
 cp -r vendor/sebastianks/volcano/setup/* .
 ```
 
+Easy, right?
+
+### Wanna get started even quicker?
+
+You can try one of the official templates available. This gives you opinionated and up-to-date templates that will get you started right away. Found an issue with a template? Please, submit an issue on the corresponding repository.
+
+-   [Blog](https://github.com/sebastianks/volcano-blog-template)
+
 ## Posts
 
 Write blog posts in an easy and straightforward way with Posts. All you do is put your Markdown files in the `/site/posts/` directory and you are good to go!
