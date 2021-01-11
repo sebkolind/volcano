@@ -38,10 +38,9 @@ function get_posts($tag = 'ul') {
     echo '<' . $tag . ' class="vo-list vo-posts">';
     foreach ($all_posts as $post) {
         $post_title = post_meta('title', false, $post);
-        $post_written = post_meta('written', false, $post);
         $post_link = get_post_link($post);
 
-        echo '<li><a href="' . $post_link . '">' . $post_title . $post_written . '</a></li>';
+        echo '<li><a href="' . $post_link . '">' . $post_title . '</a></li>';
     }
     echo '</' . $tag . '>';
 }
