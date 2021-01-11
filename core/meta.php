@@ -75,6 +75,21 @@ function site_meta($needle = false, $print = false, $haystack = null) {
         if (stripos($value, 'Description') !== false) {
             $meta['description'] = trim(str_ireplace('Description:', '', $value));
         }
+
+        // Written
+        if (stripos($value, 'Written') !== false) {
+            $meta['written'] = trim(str_ireplace('Written:', '', $value));
+        }
+
+        // Updated
+        if (stripos($value, 'Updated') !== false) {
+            $meta['updated'] = trim(str_ireplace('Updated:', '', $value));
+        }
+
+        // Author
+        if (stripos($value, 'Author') !== false) {
+            $meta['author'] = trim(str_ireplace('Author:', '', $value));
+        }
     }
 
     if ($needle) {
