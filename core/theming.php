@@ -1,10 +1,15 @@
 <?php
 
+// TODO: Fix this file... :)
+
+use V\Url;
+
 /**
  * @desc - get a file in the theme folder
  * @param string $filename - the filename
  */
-function get_theme_file($filename) {
+function get_theme_file($filename)
+{
     if (!$filename) {
         return false;
     }
@@ -16,23 +21,30 @@ function get_theme_file($filename) {
     }
 }
 
-function get_header() {
+function get_header()
+{
     get_theme_file('header.php');
 }
 
-function get_footer() {
+function get_footer()
+{
     get_theme_file('footer.php');
 }
 
-function get_sidebar() {
+function get_sidebar()
+{
     get_theme_file('sidebar.php');
 }
 
 /**
  * @desc - get styles in site and plugins
  */
-function get_stylesheets() {
-    foreach (glob('{site/theme/*.css,site/plugins/*/*.css}', GLOB_BRACE) as $file) {
+function get_stylesheets()
+{
+    foreach (
+        glob('{site/theme/*.css,site/plugins/*/*.css}', GLOB_BRACE)
+        as $file
+    ) {
         echo '<link rel="stylesheet" type="text/css" href="' . $file . '">';
     }
 }
@@ -40,8 +52,12 @@ function get_stylesheets() {
 /**
  * @desc - get JS in site and plugins
  */
-function get_scripts() {
-    foreach (glob('{site/theme/*.js,site/plugins/*/*.js}', GLOB_BRACE) as $file) {
+function get_scripts()
+{
+    foreach (
+        glob('{site/theme/*.js,site/plugins/*/*.js}', GLOB_BRACE)
+        as $file
+    ) {
         echo '<script type="text/javascript" src="' . $file . '"></script>';
     }
 }
@@ -49,20 +65,23 @@ function get_scripts() {
 /**
  * @desc - get body classes. Used in the <body> tag
  */
-function body_class() {
+function body_class()
+{
     if (is_home()) {
         echo 'is-home home';
     } else {
-        $page_or_post = is_post() ? 'is-post post-' : 'is-page page-';
-        echo $page_or_post . implode('-', url_params());
+        // TODO: How to use `isPost` when a filepath is required?
+        //        $page_or_post = V\Posts::isPost() ? 'is-post post-' : 'is-page page-';
+        //        echo $page_or_post . implode('-', Url::getParameters());
     }
 }
 
 /**
  * @desc - checks if current page in home
  */
-function is_home() {
-    if (url_params()) {
+function is_home()
+{
+    if (Url::getParameters()) {
         return false;
     }
 
@@ -73,13 +92,14 @@ function is_home() {
  * @desc - checks if current page _is_ a page
  * 	or if current page is specific page given by $name
  */
-function is_page($name = false) {
+function is_page($name = false)
+{
     if ($name) {
-        if (url_params($name)) {
+        if (Url::checkIfPage($name)) {
             return true;
         }
     } else {
-        if (url_params()) {
+        if (Url::getParameters()) {
             return true;
         }
     }
@@ -91,7 +111,8 @@ function is_page($name = false) {
  * @desc - get a theme partial
  * @param string $name - name of partial
  */
-function get_partial($name) {
+function get_partial($name)
+{
     if (is_dir(THEME . '/partials')) {
         if (file_exists(THEME . '/partials/' . $name . '.php')) {
             include THEME . '/partials/' . $name . '.php';

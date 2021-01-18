@@ -5,7 +5,8 @@
  * @param array $array - the array
  * @param boolean $report - echo result or print with <pre>
  */
-function pre($array, $report = false) {
+function pre($array, $report = false)
+{
     if ($report) {
         echo $array;
     }

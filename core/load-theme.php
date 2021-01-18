@@ -1,5 +1,8 @@
 <?php
 
+use V\Filer;
+use V\Url;
+
 require CORE . '/theming.php';
 
 // Check if theme folder exists
@@ -12,7 +15,9 @@ $req_theme_files = ['header', 'footer', 'index'];
 
 foreach ($req_theme_files as $filename) {
     if (!file_exists(THEME . '/' . $filename . '.php')) {
-        die("${filename}.php is a required theme file. You have to create it in /site/theme");
+        die(
+            "${filename}.php is a required theme file. You have to create it in /site/theme"
+        );
     }
 }
 
@@ -21,16 +26,18 @@ foreach ($req_theme_files as $filename) {
  */
 
 // If on a page, and template exists
-if (url_params() && file_exists(TEMPLATES . '/' . url_params()[0] . '.php')) {
-    include TEMPLATES . '/' . url_params()[0] . '.php';
+if (Url::getParameters() && Filer::getFile(Filer::getCurrentFilepath() . '.php', TEMPLATES)) {
+    include TEMPLATES . '/' . Filer::getCurrentFilepath() . '.php';
 }
 
 // No page, but custom home template
-elseif (!url_params() && USE_HOME_TEMPLATE) {
+elseif (!Url::getParameters() && USE_HOME_TEMPLATE) {
     if (file_exists(TEMPLATES . '/home.php')) {
         include TEMPLATES . '/home.php';
     } else {
-        die('Trying to use custom home template, but no template named "home.php" was found in /site/templates/');
+        die(
+            'Trying to use custom home template, but no template named "home.php" was found in /site/templates/'
+        );
     }
 }
 

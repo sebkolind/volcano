@@ -1,31 +1,56 @@
 <?php
 
+namespace V;
+
+interface IUrl
+{
+    public static function getParameters(): array;
+    public static function checkIfPage(string $needle): bool;
+}
+
 /**
- * @desc - all things with the url
- * @param string $param - a specific parameter
- * @return - specific param or array of parameters
+ * Class Url
+ *
+ * Handles everything with the URL.
+ *
+ * @package V
  */
-function url_params($param = false) {
-    $url = str_replace([$_SERVER['SERVER_NAME'], '//'], '', $_SERVER['REQUEST_URI']);
-
-    $url_params = explode('/', $url);
-
-    // Remove all empty values from array
-    $url_params = array_filter($url_params);
-
+class Url implements IUrl
+{
     /**
-     * Reset array keys
-     * because if array_filter() removes values
-     * the keys won't start from 0
+     * Get all URL parameters
+     *
+     * @return array
      */
-    $url_params = array_values($url_params);
+    public static function getParameters(): array
+    {
+        $strippedUrl = str_replace(
+            [$_SERVER['SERVER_NAME'], '//'],
+            '',
+            $_SERVER['REQUEST_URI']
+        );
 
-    if ($param) {
-        $key = array_search($param, $url_params);
-        $param = $key !== false ? $url_params[$key] : '';
-    } else {
-        $param = $url_params;
+        $tokenizedUrl = explode('/', $strippedUrl);
+    
+        // Remove all empty values from array
+        $urlParameters = array_filter($tokenizedUrl);
+
+        /**
+         * Reset array keys because if array_filter() removes values
+         * the keys won't start from 0
+         */
+        return array_values($urlParameters);
     }
 
-    return $param;
+    /**
+     * Check if a given page
+     * TODO: Is this needed?
+     *
+     * @param string $needle
+     * @return bool
+     */
+    public static function checkIfPage(string $needle): bool
+    {
+        return array_search($needle, self::getParameters()) !== false;
+    }
 }

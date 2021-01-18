@@ -1,5 +1,4 @@
 <?php
-
 require 'vendor/autoload.php';
 
 date_default_timezone_set('Europe/Copenhagen');
@@ -9,13 +8,18 @@ if (IS_DEV) {
     ini_set('display_errors', 1);
 }
 
+require 'Filer.php';
+require 'Posts.php';
+require 'Meta.php';
+require 'Router.php';
+require 'Url.php';
+
+require 'Models/Post.php';
+
 require 'constants.php';
-require 'url.php';
-require 'meta.php';
 require 'utilities.php';
 require 'markdown.php';
 require 'content.php';
-require 'posts.php';
 require 'plugins.php';
 require 'generators.php';
 

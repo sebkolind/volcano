@@ -6,7 +6,8 @@
  * @param string $item_tag - the HTML tag of each item
  * @param string $tag - the HTML tag for the wrapper
  */
-function generate_nav($items, $item_sep = '', $item_tag = '', $tag = 'nav') {
+function generate_nav($items, $item_sep = '', $item_tag = '', $tag = 'nav')
+{
     $total_items = count($items);
     $i = 1;
 

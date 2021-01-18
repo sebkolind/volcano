@@ -10,13 +10,17 @@
  * @param array|boolean $filename false or an array specifying path and filename
  * @return void prints the parsed Markdown file
  */
-function parse_markdown($filename = false) {
+function parse_markdown($filename = false)
+{
     $file = implode('/', $filename) . '.md';
     $directory = $filename && file_exists(PAGES . '/' . $file) ? PAGES : POSTS;
-    $filepath = !$filename ? $directory . '/default.md' : $directory . '/' . $file;
+    $filepath = !$filename
+        ? $directory . '/default.md'
+        : $directory . '/' . $file;
 
     if (!file_exists($filepath)) {
-        $filename = USE_404 && file_exists(PAGES . '/404.md') ? '404' : 'default';
+        $filename =
+            USE_404 && file_exists(PAGES . '/404.md') ? '404' : 'default';
         $filepath = PAGES . '/' . $filename . '.md';
     }
 
