@@ -4,8 +4,23 @@ namespace V;
 
 use Parsedown;
 
+use V\Models\Post;
+
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+use RegexIterator;
+
 /**
- * Class Volcano
+ * To-do
+ * 
+ * - Make it possible to "extend" Volcano. Is plugins the way to go?
+ * - Test that we can still do the old things.
+ * - 
+ */
+
+/**
+ * Volcano🌋
+ * A lightweight, extendable and fast flat-file website and blog constructor.
  * @package V
  */
 class Volcano
@@ -26,21 +41,6 @@ class Volcano
         $this->checkRequiredFiles();
         $this->resolve();
     }
-
-    /**
-     * Load either
-     * - Home.php if useHomeTemplate=true
-     * - Template from TEMPLATES if it matches the route
-     * - Page if there is one matching the route
-     * - Post if there is one matching the route
-     * - 404 if use404=true
-     * - die if nothing else
-     */
-
-    /**
-     * `isPage` and `isPost` could potentially be one method,
-     * but kept as two since it is clearer to understand.
-     */
 
     /**
      * Renders the Page or Post.
@@ -73,6 +73,33 @@ class Volcano
         return $Parsedown->text($content);
 
         fclose($file);
+    }
+
+    /**
+     * Recursively gets all posts in the POSTS directory.
+     * @return Post[]
+     */
+    public static function posts(): array
+    {
+        $allPosts = function () {
+            $dir = new RecursiveDirectoryIterator(POSTS);
+            $iterator = new RecursiveIteratorIterator($dir);
+            $result = new RegexIterator(
+                $iterator,
+                '/.*(.md)/',
+                RegexIterator::MATCH
+            );
+
+            foreach ($result as $post) {
+                yield $post;
+            }
+        };
+
+        $posts = [];
+        foreach ($allPosts() as $postPath) {
+            array_push($posts, new Post($postPath));
+        }
+        return $posts;
     }
 
     /**
