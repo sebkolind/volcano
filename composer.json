@@ -1,8 +1,13 @@
 {
-    "name": "sebastianks/volcano",
-    "license": "MIT",
-    "description": "An extendable & lightweight flat-file blog and website constructor.",
-    "require": {
-        "erusev/parsedown": "^1.7"
+  "name": "sebastianks/volcano",
+  "license": "MIT",
+  "description": "An extendable & lightweight flat-file blog and website constructor.",
+  "require": {
+    "erusev/parsedown": "^1.7"
+  },
+  "autoload": {
+    "psr-0": {
+      "Volcano": ""
     }
+  }
 }
