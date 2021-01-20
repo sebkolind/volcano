@@ -55,7 +55,7 @@ class Volcano
         # Handle 404
         if (
             is_null($filepath)
-            && $this->setting('use404', true)
+            && $this->checkConfiguration('use404', true)
         ) {
             # `use404` is set to true, but no 404.md file exists in the PAGES directory
             if (is_null($this->getFilePath($this->getPath('pages'), '404.md'))) {
@@ -104,14 +104,18 @@ class Volcano
     }
 
     /**
-     * Get Meta data for a Post or Page
+     * Get Meta data for an Entry or Template.
      * @param string $type
      * @param string $filepath
      * @return ?string
      */
     public function getMeta(string $type): ?string
     {
-        $filepath = $this->getEntryPath();
+        /**
+         * Since "resolvedRoute()" resolves to "site/theme/index.php" if The Route resolves to an Entry
+         * we cannot use it for returning the Entry file (the Markdown file).
+         */
+        $filepath = $this->isEntry() ? $this->getEntryPath() : $this->resolvedRoute();
         
         if (!file_exists($filepath)) {
             $filepath = $this->getPath('pages') . '/404.md';
@@ -203,7 +207,7 @@ class Volcano
     }
 
     /**
-     * Get the path to the resolved Entry. That is a Post or a Page.
+     * Get the path to the resolved Entry.
      * @return string
      */
     private function getEntryPath(): string
@@ -219,7 +223,7 @@ class Volcano
      */
     private function isHome(): bool
     {
-        return $this->setting('useHomeTemplate', true)
+        return $this->checkConfiguration('useHomeTemplate', true)
             # Make sure we are at the root of the website
             && $this->route() === ''
             && !is_null($this->getFilePath($this->getPath('templates'), 'home.php'));
@@ -255,11 +259,20 @@ class Volcano
     }
 
     /**
-     * Gets and checks a configuration option.
-     * @param string $needle
-     * @param mixed $condition
+     * Check if The Route resolves to an Entry.
+     * @return bool
      */
-    private function setting(string $needle, mixed $condition): bool
+    private function isEntry(): bool
+    {
+        return $this->isPage() || $this->isPost();
+    }
+
+    /**
+     * Checks if a configuration option equals a condition.
+     * @param string $needle
+     * @param string|bool $condition
+     */
+    private function checkConfiguration(string $needle, string|bool $condition): bool
     {
         return array_key_exists($needle, $this->configuration)
             && $this->configuration[$needle] === $condition;
@@ -304,7 +317,7 @@ class Volcano
         }
 
         # The Route resolves to a Page or Post
-        elseif ($this->isPage() || $this->isPost()) {
+        elseif ($this->isEntry()) {
             return $this->getFilePath($this->getPath('theme'), 'index.php');
         }
 
