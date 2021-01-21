@@ -6,8 +6,8 @@
     "erusev/parsedown": "^1.7"
   },
   "autoload": {
-    "psr-0": {
-      "Volcano": ""
+    "psr-4": {
+      "Volcano\\": ""
     }
   }
 }
