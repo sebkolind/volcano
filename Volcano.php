@@ -41,7 +41,7 @@ class Volcano
 
     public function __construct(?array $userConfiguration)
     {
-        # A theme needs at least a "index.php" file which calls "render()"
+        # A theme needs at least a "index.php" file.
         if (!file_exists($this->getFilePath($this->getPath('theme'), 'index.php'))) {
             die('index.php is a required theme file. You have to create it in /site/theme');
         }
