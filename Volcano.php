@@ -149,7 +149,7 @@ class Volcano
             if (str_contains($file, '<!--')) {
                 $file = str_replace(["\r\n", "\r", "\n"], '', $file);
                 preg_match('/<!--(.*)-->/', $file, $match);
-                $tokens = explode('*', implode('', $match));
+                $tokens = explode('*', $match[1]);
             }
         }
 
