@@ -35,7 +35,7 @@ class Volcano
             'pages' => 'site/pages',
             'posts' => 'site/posts',
             'theme' => 'site/theme',
-            'templates' => 'site/theme/templates',
+            'templates' => 'site/templates',
         ],
     ];
 
