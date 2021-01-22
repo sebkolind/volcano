@@ -1,22 +1,21 @@
 # Volcano 🌋
 
-An extendable & lightweight flat file blog and website constructor.
+An extendable & lightweight flat-file blog and website constructor.
 
 ## Features
 
--   No database
--   Lightweight, extendable & fast
--   You write your content in beautiful markdown
--   Easy-to-use plugin environment
--   Great with custom designs
+- No database
+- Lightweight, extendable & fast
+- You write your content in beautiful Markdown
+- Great with custom designs
 
 ## Requirements
 
 A server running PHP 7 or higher.
 
-Might run on older PHP versions but those are not tested.
+_Might run on older PHP versions but those are not tested._
 
-## Get started
+## Getting Started
 
 ```bash
 mkdir ~/path/to/project
@@ -32,127 +31,93 @@ cd ~/path/to/project/
 cp -r vendor/sebastianks/volcano/setup/* .
 ```
 
-Easy, right?
+### You are almost there!
 
-### Wanna get started even quicker?
+Volcano will now serve your app from `/site/theme/index.php` which at it's lightest can be as slim as:
 
-You can try one of the official templates available. This gives you opinionated and up-to-date templates that will get you started right away. Found an issue with a template? Please, submit an issue on the corresponding repository.
+```php
+<?php
+use Volcano\Volcano;
 
--   [Blog](https://github.com/sebastianks/volcano-blog-template)
+# Spin up Volcano by creating an instance of the Volcano class.
+$app = new Volcano();
 
-## Posts
-
-Write blog posts in an easy and straightforward way with Posts. All you do is put your Markdown files in the `/site/posts/` directory and you are good to go!
-
-Organize your posts in sub-directories like so:
-
-```bash
-site
-    posts
-        sub1
-            my-post-in-sub1.md
-        sub2
-            another-nested-post.md
-            this-is-second-post.md
-    post-not-in-sub.md
-    another-not-in-sub-post.md
+# `Render` takes care of rendering the Page, Post or Template matching the current route. This is essential for Volcano to do it's work.
+echo $app->render();
 ```
 
-Which will allow you to access posts like this:
+This is really just the bare minimum to get up and running with Volcano. A real world example might require a bit more work:
 
-```bash
-site/posts/sub1/my-post-in-sub1.md -> /sub1/my-post-in-sub1
-site/posts/post-not-in-sub.md -> /post-not-in-sub
-```
-
-## Meta data
-
-Both pages and posts enables you to add meta data like title, description and keywords directly in the Markdown file like this:
-
-```md
-<!--
-* Title: My blog post
-* Description: I am just a regular blog post.
--->
-
-## My blog post
-```
-
-These can easily be retrieved with the helper method [site_meta](https://github.com/sebastianks/volcano/blob/master/core/meta.php#L10) to use in your theme like so:
-
-```html
+```php
+<?php
+use Volcano\Volcano;
+$app = new Volcano();
+?>
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Volcano &mdash; <?php site_meta('title', true); ?></title>
-        <meta name="description" content="<?php site_meta('description', true); ?>" />
-    </head>
-    <body class="<?php body_class(); ?>"></body>
+<head>
+  <meta charset="utf-8">
+  <title>My site &mdash; <?php echo $app->getMeta('title');?></title>
+  <meta name="description" content="<?php echo $app->getMeta('description');?>">
+</head>
+<body>
+  <?php echo $app->render(); ?>
+</body>
 </html>
 ```
 
-## Theming
+Now, to make life a bit easier we could move the instantiation of Volcano (the `$app = new Volcano()` part) in it's own file which we could then call upon when needed:
 
-There are some minimum requirements for your theme to run. That is:
-
--   The `theme` folder in `/site/` (obviously)
--   Inside `/site/theme` you need the following files:
-    -   header.php
-    -   footer.php
-    -   index.php
--   That's it!
-
-### Templates
-
-A template is a file that let's you create a custom layout for a specific page on your site.
-
-Templates live in a folder in `/site/theme/` called `/templates`. A template file equals the page name.
-Page `yoursite.com/about-me` requires a template file called `about-me.php`.
-
-### Partials
-
-In addition to templates you have partials. A partial is a piece of code that you find yourself reusing.
-
-Partials live in a folder in `/site/theme` called `/partials`. Partial names should be a-Z, 0-9 and `.php` files.
-To use a partial in your theme you call it by filename without `.php`. Example: `<?php get_partial('partial-name'); ?>`.
-
-### CSS & JS
-
-All `.css` and `.js` files in `/site/theme` and `/site/plugins` are automatically loaded.
-The only thing you have to do is use `get_stylesheets()` and `get_scripts()`. Example:
-
+```bash
+# File structure of your app
+my-site
+  - site
+    - pages
+    - posts
+      my-first-post.md
+    - templates
+    - theme
+      index.php
+    app.php
+  index.php
 ```
+
+Where `app.php` would contain:
+
+```php
+<?php
+use Volcano\Volcano;
+return new Volcano();
+```
+
+This allows us in a theme file to do something like this:
+
+```php
+# site/theme/index.php
+<?php
+# Get the instance of Volcano we created in previous step.
+$app = require __DIR__ . '/../app.php';
+?>
 <!DOCTYPE html>
 <html>
   <head>
-    <?php get_stylesheets(); ?>
-  </head>
-  <body>
-    ...
-
-    <?php get_scripts(); ?>
-  </body>
+    <meta charset="utf-8">
+    # Get the "meta data" title
+    <title>My site &mdash; <?php echo $app->getMeta('title');?></title>
+    # and description
+    <meta name="description" content="<?php echo $app->getMeta('description');?>">
+</head>
+<body>
+  # $app->render() will take care of resolving your app and show your content from either a Page, Post or Template.
+  <?php echo $app->render(); ?>
+</body>
 </html>
 ```
 
-Each file will be loaded and added to the DOM individually one after another.
+## What's next?
 
-## Plugins
+You just created your first app with Volcano🎉 Now you can go ahead and make a beautiful theme, or start composing content for your users.
 
-Plugins in Volcano is easy to build and easy to use.
-
-Plugins are basically a function that executes upon calling `plugin('plugin-name')` which could create a Facebook widget, a gallery or something else.
-
-The requirements for a plugin is:
-
--   A folder inside `/site/plugins/` where your plugin lives. Example: `/site/plugins/google-analytics/`
--   Inside that folder you need at least `index.php`
--   `index.php` requires a function with the same name as the folder _but_ in camelCase. Example: `function googleAnalytics() { ... }`
-
-To call a plugin from your theme files use:
-
-`plugin('google-analytics');`
-
-The `plugin()` function takes two arguments. First is the name. Second argument is passed to the plugin root function, like: `googleAnalytics($id)`. The second argument is used to pass options to your plugin. This could be a single value, like in this case, an id, or an array of options. `$options` is default to `false`, and is not needed if your plugin doesn't need it.
-
-Your plugin can have `.css` and `.js` files, and will automatically be added to the front-end. Read the section "CSS & JS" for more information.
+- Read the [Wiki](https://github.com/sebastianks/volcano/wiki). It's short and will get you started in no time.
+- Creating a blog? Try out the official [Blog](https://github.com/sebastianks/volcano-blog-template) template and start blogging right away.
+- Need help with anything? Feel free to reach out [on Discord](https://discord.gg/pujumPht).
