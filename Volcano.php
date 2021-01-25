@@ -1,11 +1,5 @@
 <?php
 
-/**
- * To-do
- *
- * - Make it possible to "extend" Volcano. Is plugins the way to go?
- */
-
 namespace Volcano;
 
 use Volcano\Models\Post;
