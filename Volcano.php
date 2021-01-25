@@ -6,9 +6,19 @@
  * - Make it possible to "extend" Volcano. Is plugins the way to go?
  */
 
+namespace Volcano;
+
+use Volcano\Models\Post;
+
+use Parsedown;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+use RegexIterator;
+
 /**
  * Volcano🌋
  * A lightweight, extendable and fast flat-file website and blog constructor.
+ * @package Volcano
  */
 class Volcano
 {
@@ -25,15 +35,15 @@ class Volcano
             'pages' => 'site/pages',
             'posts' => 'site/posts',
             'theme' => 'site/theme',
-            'templates' => 'site/theme/templates',
+            'templates' => 'site/templates',
         ],
     ];
 
     public function __construct(?array $userConfiguration)
     {
-        # A theme needs at least a "index.php" file which calls "render()"
+        # A theme needs at least a "index.php" file.
         if (!file_exists($this->getFilePath($this->getPath('theme'), 'index.php'))) {
-            die("index.php is a required theme file. You have to create it in /site/theme");
+            die('index.php is a required theme file. You have to create it in /site/theme');
         }
 
         # Setup configurations and paths
@@ -45,7 +55,6 @@ class Volcano
 
     /**
      * Renders the Page or Post.
-     * TODO: Should we allow passing in a specific route to resolve?
      * @return string
      */
     public function render(): string
@@ -80,8 +89,6 @@ class Volcano
      */
     public function posts(): array
     {
-        require_once 'Models/Post.php';
-
         $allPosts = function () {
             $dir = new RecursiveDirectoryIterator($this->getPath('posts'));
             $iterator = new RecursiveIteratorIterator($dir);
@@ -106,19 +113,31 @@ class Volcano
     /**
      * Get Meta data for an Entry or Template.
      * @param string $type
-     * @param string $filepath
-     * @return ?string
+     * @param ?Post $entry
+     * @return string
      */
-    public function getMeta(string $type): ?string
+    public function getMeta(string $type, ?Post $entry = null): string
     {
         /**
          * Since "resolvedRoute()" resolves to "site/theme/index.php" if The Route resolves to an Entry
          * we cannot use it for returning the Entry file (the Markdown file).
          */
         $filepath = $this->isEntry() ? $this->getEntryPath() : $this->resolvedRoute();
-        
+
+        /**
+         * Set $filepath to an Entry's path if given.
+         * This is typically used if rendering a list of Entry's.
+         */
+        if (
+            !is_null($entry)
+            && $entry->filepath !== ''
+            && file_exists($entry->filepath)
+        ) {
+            $filepath = $entry->filepath;
+        }
+
         if (!file_exists($filepath)) {
-            $filepath = $this->getPath('pages') . '/404.md';
+            $filepath = $this->getFilePath($this->getPath('pages'), '404.md');
         }
 
         $file = file_get_contents($filepath);
@@ -130,7 +149,7 @@ class Volcano
             if (str_contains($file, '<!--')) {
                 $file = str_replace(["\r\n", "\r", "\n"], '', $file);
                 preg_match('/<!--(.*)-->/', $file, $match);
-                $tokens = explode('*', implode('', $match));
+                $tokens = explode('*', $match[1]);
             }
         }
 
@@ -154,7 +173,7 @@ class Volcano
         }
 
         # It was not possible to resolve to any meta data.
-        return null;
+        return '';
     }
 
     /**
@@ -174,24 +193,17 @@ class Volcano
      */
     private function configure(?array $userConfiguration): void
     {
+        # Get consumer project root dir
         $reflection = new \ReflectionClass(\Composer\Autoload\ClassLoader::class);
         $consumerDir = dirname($reflection->getFileName(), 3);
 
-        # Set paths if not given in the user configuration
+        # Set default paths
         foreach ($this->configuration['paths'] as $key => $value) {
-            if (!array_key_exists($key, $userConfiguration)) {
-                $this->configuration['paths'][$key] = "$consumerDir/$value";
-            }
+            $this->configuration['paths'][$key] = "$consumerDir/$value";
         }
 
-        # Override existing configurations if any
-        if (!is_null($userConfiguration)) {
-            foreach ($userConfiguration as $key => $value) {
-                if (array_key_exists($key, $this->configuration)) {
-                    $this->configuration[$key] = $value;
-                }
-            }
-        }
+        # Merge user configurations with default configurations
+        $this->configuration = array_replace_recursive($this->configuration, $userConfiguration);
     }
 
     /**
@@ -284,14 +296,9 @@ class Volcano
      */
     private function route(): string
     {
-        $strippedUrl = str_replace(
-            [$_SERVER['SERVER_NAME'], '//'],
-            '',
-            $_SERVER['REQUEST_URI']
-        );
+        $strippedUrl = str_replace([$_SERVER['SERVER_NAME'], '//'], '', $_SERVER['REQUEST_URI']);
 
         # Convert to array so that we can remove empty values
-        # TODO: Is this actually needed?
         $tokenizedUrl = explode('/', $strippedUrl);
     
         # Remove all empty values from array
@@ -328,7 +335,8 @@ class Volcano
     }
 
     /**
-     * Handles resolving the correct Entry we want.
+     * "The End"
+     * Handles resolving the correct Template or Entry we want.
      * In this order: home.php -> custom template -> Page -> Post -> die()
      * @return void
      */
