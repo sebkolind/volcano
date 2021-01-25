@@ -2,8 +2,7 @@
 
 namespace Volcano;
 
-use Volcano\Models\Post;
-
+use Generator;
 use Parsedown;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -79,7 +78,7 @@ class Volcano
 
     /**
      * Recursively gets all posts in the POSTS directory.
-     * @return Post[]
+     * @return Entry[]
      */
     public function posts(): array
     {
@@ -99,7 +98,7 @@ class Volcano
 
         $posts = [];
         foreach ($allPosts() as $postPath) {
-            array_push($posts, new Post($postPath));
+            array_push($posts, new Entry($postPath));
         }
         return $posts;
     }
@@ -107,10 +106,10 @@ class Volcano
     /**
      * Get Meta data for an Entry or Template.
      * @param string $type
-     * @param ?Post $entry
+     * @param ?Entry $entry
      * @return string
      */
-    public function getMeta(string $type, ?Post $entry = null): string
+    public function getMeta(string $type, ?Entry $entry = null): string
     {
         /**
          * Since "resolvedRoute()" resolves to "site/theme/index.php" if The Route resolves to an Entry
@@ -248,7 +247,7 @@ class Volcano
      * Check if The Route resolves to a Page
      * @return bool
      */
-    private function isPage(): bool
+    public function isPage(): bool
     {
         return $this->route() !== ''
             && !is_null($this->getFilePath($this->getPath('pages'), $this->route() . '.md'));
@@ -258,7 +257,7 @@ class Volcano
      * Check if The Route resolves to a Post
      * @return bool
      */
-    private function isPost(): bool
+    public function isPost(): bool
     {
         return $this->route() !== ''
             && !is_null($this->getFilePath($this->getPath('posts'), $this->route() . '.md'));
@@ -268,7 +267,7 @@ class Volcano
      * Check if The Route resolves to an Entry.
      * @return bool
      */
-    private function isEntry(): bool
+    public function isEntry(): bool
     {
         return $this->isPage() || $this->isPost();
     }
