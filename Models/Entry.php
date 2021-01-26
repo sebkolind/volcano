@@ -13,7 +13,7 @@ interface IEntry
 /**
  * Class Entry
  * The Entry Model
- * @package Volcano
+ * @package Volcano\Models
  */
 class Entry extends Volcano implements IEntry
 {
