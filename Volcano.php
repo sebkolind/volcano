@@ -25,7 +25,6 @@ class Volcano
         'use404' => true,
         'isDev' => false,
         'paths' => [
-            'site' => 'site',
             'pages' => 'site/pages',
             'posts' => 'site/posts',
             'theme' => 'site/theme',
@@ -37,7 +36,7 @@ class Volcano
     {
         # A theme needs at least a "index.php" file.
         if (!file_exists($this->getFilePath($this->getPath('theme'), 'index.php'))) {
-            die('index.php is a required theme file. You have to create it in /site/theme');
+            die('index.php is a required theme file. You have to create it in ' . $this->getPath('theme'));
         }
 
         # Setup configurations and paths
@@ -62,7 +61,7 @@ class Volcano
         ) {
             # `use404` is set to true, but no 404.md file exists in the PAGES directory
             if (is_null($this->getFilePath($this->getPath('pages'), '404.md'))) {
-                die('We are trying to show 404.md, but it does not exist. We have to exit.');
+                die('We are trying to show 404.md, but it does not exist in ' . $this->getPath('pages'));
             }
             $filepath = $this->getFilePath($this->getPath('pages'), '404.md');
         }
@@ -331,7 +330,7 @@ class Volcano
     /**
      * "The End"
      * Handles resolving the correct Template or Entry we want.
-     * In this order: home.php -> custom template -> Page -> Post -> die()
+     * In this order: home.php -> Template -> Page -> Post -> die()
      * @return void
      */
     private function resolve(): void
