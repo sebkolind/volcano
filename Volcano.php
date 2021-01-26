@@ -23,7 +23,6 @@ class Volcano
     private array $configuration = [
         'useHomeTemplate' => false,
         'use404' => true,
-        'isDev' => false,
         'paths' => [
             'pages' => 'site/pages',
             'posts' => 'site/posts',
