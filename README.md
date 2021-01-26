@@ -1,6 +1,6 @@
 # Volcano 🌋
 
-An extendable & lightweight flat-file blog and website constructor.
+An lightweight flat-file blog and website constructor.
 
 ## Features
 
