@@ -1,14 +1,7 @@
 <?php
-/**
- * This file is the template for a normal page
- * It's used if no template matches the page currently on
- */
-?>
 
-<?php get_header(); ?>
+# Get our App instance
+$app = require __DIR__ . '/../../app.php';
 
-<article>
-	<?php content(); ?>
-</article>
-
-<?php get_footer();
+# This is where the magic happens 🧙‍♂️
+echo $app->render();
