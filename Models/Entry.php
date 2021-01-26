@@ -1,6 +1,8 @@
 <?php
 
-namespace Volcano;
+namespace Volcano\Models;
+
+use Volcano\Volcano;
 
 interface IEntry
 {
@@ -24,10 +26,9 @@ class Entry extends Volcano implements IEntry
     public function __construct(
         public string $file = '',
     ) {
-        if (!$this->isEntry()) {
-            die("$file does not point to an Entry.");
-        }
-        $this->path = $this->isPost() ? $this->getPath('posts') : $this->getPath('pages');
+        $this->path = strpos($file, $this->getPath('posts'))
+            ? $this->getPath('posts')
+            : $this->getPath('pages');
     }
 
     /**
