@@ -1,6 +1,6 @@
 <?php
 
-# Let Composer autoload Volcano
+# Let Composer autoload
 require 'vendor/autoload.php';
 
 # Require our App to start up
