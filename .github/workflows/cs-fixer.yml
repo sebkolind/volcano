@@ -9,6 +9,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: PHP-CS-Fixer
-        uses: sebastianks/php-cs-fixer-ga@v0.0.1
+        uses: sebastianks/php-cs-fixer-ga@v0.0.2
         with:
-          args: --verbose .
+          args: -vvv --using-cache false .
