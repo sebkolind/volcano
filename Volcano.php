@@ -2,7 +2,8 @@
 
 namespace Volcano;
 
-use Generator;
+use Volcano\Models\Entry;
+
 use Parsedown;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -123,10 +124,10 @@ class Volcano
          */
         if (
             !is_null($entry)
-            && $entry->filepath !== ''
-            && file_exists($entry->filepath)
+            && $entry->file !== ''
+            && file_exists($entry->file)
         ) {
-            $filepath = $entry->filepath;
+            $filepath = $entry->file;
         }
 
         if (!file_exists($filepath)) {
