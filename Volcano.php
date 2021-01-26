@@ -33,7 +33,7 @@ class Volcano
         ],
     ];
 
-    public function __construct(?array $userConfiguration)
+    public function __construct(?array $userConfiguration = null)
     {
         # A theme needs at least a "index.php" file.
         if (!file_exists($this->getFilePath($this->getPath('theme'), 'index.php'))) {
