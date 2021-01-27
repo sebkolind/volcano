@@ -9,6 +9,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: PHP-CS-Fixer
-        uses: sebastianks/php-cs-fixer-ga@v0.0.3
+        uses: docker://oskarstark/php-cs-fixer-ga
         with:
-          args: -vvv --using-cache false .
+          args: .
