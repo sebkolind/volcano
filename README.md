@@ -1,11 +1,12 @@
 # Volcano 🌋
 
-A lightweight flat-file blog and website constructor.
+A micro flat-file blog and website constructor.
 
 ## Features
 
 - No database
-- Lightweight, extendable & fast
+- Fast
+- Easy to use
 - You write your content in beautiful Markdown
 - Great with custom designs
 

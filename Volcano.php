@@ -11,7 +11,7 @@ use RegexIterator;
 
 /**
  * Volcano🌋
- * A lightweight, extendable and fast flat-file website and blog constructor.
+ * A micro flat-file blog and website constructor.
  * @package Volcano
  */
 class Volcano

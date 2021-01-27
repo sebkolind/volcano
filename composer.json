@@ -1,7 +1,7 @@
 {
   "name": "sebastianks/volcano",
   "license": "MIT",
-  "description": "A lightweight, extendable and fast flat-file website and blog constructor.",
+  "description": "A micro flat-file website and blog constructor.",
   "require": {
     "php": ">=8.0.0",
     "erusev/parsedown": "^1.7"
