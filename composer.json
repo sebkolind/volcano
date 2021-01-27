@@ -3,12 +3,15 @@
   "license": "MIT",
   "description": "A lightweight, extendable and fast flat-file website and blog constructor.",
   "require": {
-    "erusev/parsedown": "^1.7",
-    "friendsofphp/php-cs-fixer": "^2.18"
+    "php": ">=8.0.0",
+    "erusev/parsedown": "^1.7"
   },
   "autoload": {
     "psr-4": {
       "Volcano\\": ""
     }
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^2.18"
   }
 }
