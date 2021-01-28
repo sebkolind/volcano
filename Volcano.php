@@ -46,6 +46,7 @@ class Volcano
     }
 
     /**
+     * "The Magic" 🧙‍♂️
      * Renders the Page or Post.
      * @return string
      */
