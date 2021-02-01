@@ -21,7 +21,6 @@ class Volcano
      * @var array $configuration
      */
     private array $configuration = [
-        'useHomeTemplate' => false,
         'use404' => true,
         'paths' => [
             'pages' => 'site/pages',
@@ -229,9 +228,8 @@ class Volcano
      */
     private function isHome(): bool
     {
-        return $this->checkConfiguration('useHomeTemplate', true)
-            # Make sure we are at the root of the website
-            && $this->route() === ''
+        # Make sure we are at the root of the website
+        return $this->route() === ''
             && !is_null($this->getFilePath($this->getPath('templates'), 'home.php'));
     }
 
