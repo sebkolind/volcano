@@ -21,7 +21,6 @@ class Volcano
      * @var array $configuration
      */
     private array $configuration = [
-        'use404' => true,
         'paths' => [
             'pages' => 'site/pages',
             'posts' => 'site/posts',
@@ -54,15 +53,13 @@ class Volcano
         $filepath = $this->getEntryPath();
 
         # Handle 404
-        if (
-            is_null($filepath)
-            && $this->checkConfiguration('use404', true)
-        ) {
-            # `use404` is set to true, but no 404.md file exists in the PAGES directory
+        if (is_null($filepath)) {
             if (is_null($this->getFilePath($this->getPath('pages'), '404.md'))) {
-                die('We are trying to show 404.md, but it does not exist in ' . $this->getPath('pages'));
+                header('Location: /', true);
+                die();
             }
-            $filepath = $this->getFilePath($this->getPath('pages'), '404.md');
+            header('Location: /404', true);
+            die();
         }
 
         $Parsedown = new Parsedown();
@@ -323,6 +320,7 @@ class Volcano
         # The Route resolved to 404
         elseif (!is_null($this->getFilePath($this->getPath('pages'), '404.md'))) {
             return header('Location: /404', true);
+            die();
         }
 
         # The Route resolves to nothing.
