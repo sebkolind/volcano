@@ -55,9 +55,11 @@ class Volcano
         # Handle 404
         if (is_null($filepath)) {
             if (is_null($this->getFilePath($this->getPath('pages'), '404.md'))) {
-                header('Location: /', true);
+                # Since no 404 page exists, set HTTP response to 404.
+                header('Location: /', true, 404);
                 die();
             }
+            # Show custom 404 page.
             header('Location: /404', true);
             die();
         }
