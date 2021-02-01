@@ -269,17 +269,6 @@ class Volcano
     }
 
     /**
-     * Checks if a configuration option equals a condition.
-     * @param string $needle
-     * @param string|bool $condition
-     */
-    private function checkConfiguration(string $needle, string|bool $condition): bool
-    {
-        return array_key_exists($needle, $this->configuration)
-            && $this->configuration[$needle] === $condition;
-    }
-
-    /**
      * "The Route"
      * @return string
      */
