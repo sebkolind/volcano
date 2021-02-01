@@ -320,6 +320,11 @@ class Volcano
             return $this->getFilePath($this->getPath('theme'), 'index.php');
         }
 
+        # The Route resolved to 404
+        elseif (!is_null($this->getFilePath($this->getPath('pages'), '404.md'))) {
+            return header('Location: /404', true);
+        }
+
         # The Route resolves to nothing.
         else {
             die('Volcano could not resolve your app. Make sure that you have the correct structure.');
