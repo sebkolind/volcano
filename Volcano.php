@@ -322,7 +322,7 @@ class Volcano
 
         # The Route resolves to nothing.
         else {
-            die('We could not resolve your app. Make sure that you have the correct structure.');
+            die('Volcano could not resolve your app. Make sure that you have the correct structure.');
         }
     }
 
