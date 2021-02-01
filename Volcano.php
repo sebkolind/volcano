@@ -77,13 +77,14 @@ class Volcano
     }
 
     /**
-     * Recursively gets all posts in the POSTS directory.
+     * Recursively get all Entries based on type.
+     * @param string $type 'posts'|'pages'. Default 'posts'.
      * @return Entry[]
      */
-    public function posts(): array
+    public function getEntries(string $type = 'posts'): array
     {
-        $allPosts = function () {
-            $dir = new RecursiveDirectoryIterator($this->getPath('posts'));
+        $allEntries = function ($type) {
+            $dir = new RecursiveDirectoryIterator($this->getPath($type));
             $iterator = new RecursiveIteratorIterator($dir);
             $result = new RegexIterator(
                 $iterator,
@@ -91,16 +92,16 @@ class Volcano
                 RegexIterator::MATCH
             );
 
-            foreach ($result as $post) {
-                yield $post;
+            foreach ($result as $entry) {
+                yield $entry;
             }
         };
 
-        $posts = [];
-        foreach ($allPosts() as $postPath) {
-            array_push($posts, new Entry($postPath));
+        $entries = [];
+        foreach ($allEntries($type) as $entryPath) {
+            array_push($entries, new Entry($entryPath));
         }
-        return $posts;
+        return $entries;
     }
 
     /**
