@@ -47,7 +47,7 @@ You just created your first app with Volcano🎉 Now you can go ahead and make a
 
 A couple of resources if you need some information and/or inspiration:
 
-- Read the [Wiki](https://github.com/sebastianks/volcano/wiki). It's short and will get you started in no time.
+- Read the [Wiki](https://github.com/sebastianks/volcano/wiki/Home%F0%9F%8C%8B). It's short and will get you started in no time.
 - Volcano has a well-documented codebase. Reading it will give you everything there is to know about Volcano.
 - Creating a blog? Try out the official [Blog](https://github.com/sebastianks/volcano-blog-template) template and start blogging right away.
 - Need help with anything? Feel free to reach out [on Discord](https://discord.gg/pujumPht).
